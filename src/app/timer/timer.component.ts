@@ -9,9 +9,6 @@ import { map, takeWhile, tap } from 'rxjs/operators';
   styleUrls: ['./timer.component.scss'],
 })
 export class TimerComponent implements OnInit {
-  @Input() seconds: string = '500';
-  @Output() checkTime: EventEmitter<number> = new EventEmitter();
-  countDown: any;
 
   constructor(private router: Router) {}
 
@@ -31,9 +28,8 @@ export class TimerComponent implements OnInit {
   }
 
   setTimer(t) {
+    this.finished=false;
     this.time = t.value.startTime;
-    console.log(this.time);
-
     this.intervalSubscription = interval(100).subscribe(
       () => {
         if (this.time >= 1) {
@@ -70,6 +66,7 @@ export class TimerComponent implements OnInit {
         this.intervalSubscription.unsubscribe();
       }
     );
+    this.paused = false;
   }
 }
 
