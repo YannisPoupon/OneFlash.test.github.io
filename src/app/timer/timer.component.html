@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div fxLayout="column" class="main">
+      <div fxFlex="20" fxLayout="row"></div>
+      <div fxFlex="20" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <form #t="ngForm" (ngSubmit)="setTimer(t)">
+          <div fxFlex="20" fxLayout="column"></div>
+          <div fxFlex="60" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="space-evenly center">
+              <mat-form-field
+                hintLabel="Nb characters"
+                appearance="fill"
+                class="form-group"
+              >
+                <mat-label>Set up the boom (must be numbers)</mat-label>
+                <input
+                  matInput
+                  #input
+                  type="number"
+                  placeholder="ex : 420"
+                  name="startTime"
+                  id="startTime"
+                  class="form-control"
+                  ngModel
+                  #startTime="ngModel"
+                  required
+                />
+                <mat-hint align="end"
+                  >{{ input.value?.length || 0 }}</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center">
+              <mat-form-field appearance="fill" class="form-group">
+                <mat-label>Select time format</mat-label>
+                <mat-select>
+                  <mat-option value="hh">Hours</mat-option>
+                  <mat-option value="mm">Minutes</mat-option>
+                  <mat-option value="ss">Seconds</mat-option>
+                </mat-select>
+                <mat-hint align="end"
+                  >Click the arrow to select format</mat-hint
+                >
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center">
+              <button mat-button color="primary">Start</button>
+            </div>
+            <div  fxFlex="20" fxLayout="row" fxLayoutAlign="space-evenly center" class="count">
+              {{ time }}
+            </div>
+            <div  fxFlex="20" fxLayout="row" fxLayoutAlign="space-evenly center" class="count" *ngIf="finished">
+              <h1><mat-icon>celebration</mat-icon>pouet<mat-icon>celebration</mat-icon></h1>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div fxLayout="column">
+        <button mat-button color="primary" (click)="stop()">
+          Stop
+        </button>
+        <button mat-button color="primary" (click)="resume()">
+          Resume
+        </button>
+      </div>
+        <button mat-button color="primary" (click)="reset()">
+          Reset countDown
+        </button>
+      </div>
+      <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-button color="primary" (click)="toHome()">
+          Retour à l'accueil
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

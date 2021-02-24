@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div fxLayout="column" class="main">
+      <div fxFlex="10" fxLayout="row"></div>
+      <div fxFlex="20" fxLayout="row" fxLayoutAlign="center">
+        <h2>Veuillez renseigner votre login ainsi que votre mot de passe (yannis | 12345)</h2>
+      </div>
+      <div fxFlex="20" fxLayout="row" fxLayoutAlign="center">
+
+        <div fxLayout="column" fxLayoutAlign="space-evenly center">
+          <form #u="ngForm" (ngSubmit)="userAuth(u)">
+            <div fxLayout="row" fxLayoutAlign="space-evenly center">
+              <mat-form-field appearance="fill" class="form-group">
+                <mat-label>Login</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="login"
+                  id="login"
+                  class="form-control"
+                  ngModel
+                  #login="ngModel"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center">
+              <mat-form-field appearance="fill" class="form-group">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  type="password"
+                  name="password"
+                  id="password"
+                  class="form-control"
+                  ngModel
+                  #password="ngModel"
+                  required
+                  minlength="2"
+                  maxlength="30"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center">
+              <button mat-button color="primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-evenly center"></div>
+      </div>
+      <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-button color="primary" routerLink="">Retour à l'accueil</button>
+      </div>
+    </div>
+  </body>
+</html>
